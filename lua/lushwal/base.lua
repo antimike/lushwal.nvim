@@ -1,4 +1,3 @@
-vim.cmd("packadd lush.nvim")
 local lush = require("lush")
 
 local colors = require("lushwal").colors
@@ -98,7 +97,7 @@ local scheme = lush(function()
 		StatusLineNC({ fg = colors.grey, bg = colors.br_black }),
 		StatusLineTerm({ fg = colors.br_green, bg = colors.green }),
 		StatusLineTermNC({ fg = colors.br_yellow, bg = colors.br_black }),
-		WinBar({ fg = colors.white, bg = colors.background, gui = "None"}),
+		WinBar({ fg = colors.white, bg = colors.background, gui = "None" }),
 		WinBarNC({ fg = colors.grey, bg = colors.background, gui = "None" }),
 		User({ Normal }),
 

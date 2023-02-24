@@ -38,7 +38,7 @@ M.add_reload_hook = function(callback)
 	table.insert(hooks, callback)
 end
 local function run_hooks()
-	for _,hook in pairs(hooks) do
+	for _, hook in pairs(hooks) do
 		if type(hook) == "string" then
 			vim.cmd(hook)
 		elseif type(hook) == "function" then
@@ -48,7 +48,6 @@ local function run_hooks()
 end
 M.reload_colors = function()
 	local cfg = M.config
-	vim.cmd("packadd lush.nvim")
 	colors = require("lushwal.colors")()
 	if type(cfg.color_overrides) == "function" then
 		local ok, c = pcall(cfg.color_overrides, colors)
@@ -77,7 +76,6 @@ setmetatable(M, {
 			end
 			return config
 		elseif key == "scheme" then
-			vim.cmd("packadd lush.nvim")
 			local lush = require("lush")
 
 			local cfg = lushwal.config
@@ -85,9 +83,11 @@ setmetatable(M, {
 			local scheme = require("lushwal.base")
 
 			-- Merge desired addons:
-			for _, addon in pairs(vim.tbl_filter(function(x)
-				return cfg.addons[x] == true
-			end, vim.tbl_keys(cfg.addons))) do
+			for _, addon in
+				pairs(vim.tbl_filter(function(x)
+					return cfg.addons[x] == true
+				end, vim.tbl_keys(cfg.addons)))
+			do
 				if not vim.tbl_contains(addons_to_skip, addon) then
 					xpcall(function()
 						package.loaded["lushwal.addon" .. addon] = nil
